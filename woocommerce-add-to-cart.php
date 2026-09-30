@@ -1,12 +1,26 @@
 <?php
-
 /**
- * Plugin Name: WooCommerce - Add to Cart Multiple Products with Metadata
- * Description: Add multiple products to the cart with metadata from a single URL using the "add-to-cart" parameter.
- * Version: 1.0
- * Author: Prolific Digital
+ * Plugin Name:       WooCommerce - Add to Cart Multiple Products with Metadata
+ * Plugin URI:        https://prolificdigital.com
+ * Description:       Adds multiple products to the WooCommerce cart, with per-item metadata, from a single add-to-cart URL.
+ * Version:           1.1.0
+ * Requires at least: 6.5
+ * Requires PHP:      8.4
+ * Requires Plugins:  woocommerce
+ * Author:            Prolific Digital
+ * Author URI:        https://prolificdigital.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       woocommerce-add-to-cart
+ * Domain Path:       /languages
+ * Update URI:        https://api.prolificdigital.io/api/update?plugin=woocommerce-add-to-cart
+ *
+ * @package WooCommerceAddToCart
  */
 
+defined( 'ABSPATH' ) || exit;
+
+define( 'WOOCOMMERCE_ADD_TO_CART_VERSION', '1.1.0' );
 define( 'WOOCOMMERCE_ADD_TO_CART_PLUGIN_FILE', __FILE__ );
 define( 'WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -17,6 +31,16 @@ if ( is_readable( WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR . 'vendor/autoload.php' ) )
 }
 
 require_once WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR . 'includes/update-checker.php';
+
+/**
+ * Load bundled translations from /languages (the header's Domain Path).
+ */
+add_action(
+	'init',
+	static function () {
+		load_plugin_textdomain( 'woocommerce-add-to-cart', false, dirname( plugin_basename( WOOCOMMERCE_ADD_TO_CART_PLUGIN_FILE ) ) . '/languages' );
+	}
+);
 
 class AddToCartWithMetadata {
 
