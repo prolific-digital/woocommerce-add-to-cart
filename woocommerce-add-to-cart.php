@@ -7,6 +7,17 @@
  * Author: Prolific Digital
  */
 
+define( 'WOOCOMMERCE_ADD_TO_CART_PLUGIN_FILE', __FILE__ );
+define( 'WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+// Composer dependencies (plugin-update-checker). Present in release zips;
+// in a git checkout run `composer install` first.
+if ( is_readable( WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+	require_once WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR . 'vendor/autoload.php';
+}
+
+require_once WOOCOMMERCE_ADD_TO_CART_PLUGIN_DIR . 'includes/update-checker.php';
+
 class AddToCartWithMetadata {
 
   /**
